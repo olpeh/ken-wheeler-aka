@@ -1,7 +1,7 @@
 {
   "name": "ken-wheeler-aka",
   "version": "1.0.0",
-  "description": "What is Ken Wheeler's display name in Twitter? ",
+  "description": "What is Ken Wheeler's display name on Twitter?",
   "main": "backend/index.js",
   "scripts": {
     "start": "node ./backend/index.js",
@@ -29,6 +29,7 @@
     "twit": "^2.2.10"
   },
   "devDependencies": {
+    "elm": "^0.18.0",
     "prettier": "1.13.0"
   }
 }
