@@ -1,3 +1,3 @@
 # ken-wheeler-aka
 
-What is Ken Wheeler's display name on Twitter?
+What are Ken Wheeler's display names on Twitter?
