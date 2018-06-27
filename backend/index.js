@@ -1,4 +1,3 @@
-const client = require('mongodb').MongoClient;
 const cors = require('@koa/cors');
 const koa = require('koa');
 const bodyParser = require('koa-bodyparser');
@@ -6,26 +5,26 @@ const route = require('koa-route');
 const app = new koa();
 
 const bot = require('./bot');
+const db = require('./db');
 
 require('dotenv').config();
 
 app.use(cors());
 app.use(bodyParser());
 
-const mongoUrl = process.env.MONGODB_URI;
 const port = process.env.PORT || 3000;
 console.log(process.env.PORT);
 
 async function setUpApp() {
-  const db = await client.connect(mongoUrl);
+  await db.setup();
+  bot.setup();
 
   app.use(
     route.get('/api/aka/:screenName', async (ctx, screenName) => {
       console.log('Got the request', { screenName });
-      const collection = db.collection(`results_${screenName}`);
 
       try {
-        const data = await collection.find().toArray();
+        const data = await db.getResultsForScreenName(screenName);
         ctx.response.statusCode = 200;
         ctx.response.body = { success: true, data };
       } catch (e) {
@@ -41,4 +40,3 @@ async function setUpApp() {
 }
 
 setUpApp();
-bot.setup();
