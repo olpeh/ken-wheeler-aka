@@ -24,6 +24,7 @@
     "koa-bodyparser": "^4.2.1",
     "koa-request": "^1.0.0",
     "koa-route": "^3.2.0",
+    "mongodb": "^2.2.33",
     "request": "^2.87.0",
     "twit": "^2.2.10"
   },
