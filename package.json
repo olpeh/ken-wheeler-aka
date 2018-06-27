@@ -1,0 +1,33 @@
+{
+  "name": "ken-wheeler-aka",
+  "version": "1.0.0",
+  "description": "What is Ken Wheeler's display name in Twitter? ",
+  "main": "backend/index.js",
+  "scripts": {
+    "start": "node ./backend/index.js",
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/olpeh/ken-wheeler-aka.git"
+  },
+  "author": "Olavi Haapala",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/olpeh/ken-wheeler-aka/issues"
+  },
+  "homepage": "https://github.com/olpeh/ken-wheeler-aka#readme",
+  "dependencies": {
+    "@koa/cors": "^2.2.1",
+    "dotenv": "^6.0.0",
+    "koa": "^2.5.1",
+    "koa-bodyparser": "^4.2.1",
+    "koa-request": "^1.0.0",
+    "koa-route": "^3.2.0",
+    "request": "^2.87.0",
+    "twit": "^2.2.10"
+  },
+  "devDependencies": {
+    "prettier": "1.13.0"
+  }
+}
