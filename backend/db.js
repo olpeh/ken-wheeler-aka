@@ -10,7 +10,7 @@ async function setup() {
 
 async function getResultsForScreenName(screenName) {
   const collection = db.collection(`results_${screenName}`);
-  return collection.find().toArray();
+  return collection.find({}, { name: 1, _id: 0 }).toArray();
 }
 
 async function upsertResultForScreenName(screenName, result) {
