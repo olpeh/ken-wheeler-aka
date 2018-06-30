@@ -5,6 +5,8 @@
   "main": "backend/index.js",
   "scripts": {
     "start": "node ./backend/index.js",
+    "dev": "elm-app start",
+    "build": "NODE_ENV=production elm-app build",
     "test": "test"
   },
   "repository": {

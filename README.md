@@ -33,9 +33,9 @@ Start the backend: `npm start`
 
 Deploy the backend: `git push heroku master`
 
-Start the frontend: `elm-app start`
+Start the frontend: `npm run dev`
 
-Build the frontend: `elm-app build`
+Build the frontend: `npm run build`
 
 Deploy the frontend: Use beaker browser // TODO: automate this later
 

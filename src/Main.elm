@@ -1,9 +1,9 @@
 module Main exposing (..)
 
-import Html exposing (Html, text, div, h1, img, span, br, ul, li)
+import Html exposing (Html, text, div, a, footer, h1, img, span, br, ul, li)
 import Http
-import Json.Encode
 import Json.Decode exposing (list, string, bool)
+import Markdown
 
 
 type Msg
@@ -43,28 +43,23 @@ update msg model =
             ( { model | error = toString error }, Cmd.none )
 
 
-encode : List String -> Http.Body
-encode displayNames =
-    displayNames
-        |> List.map Json.Encode.string
-        |> Json.Encode.list
-        |> Http.jsonBody
-
-
 view : Model -> Html Msg
 view model =
     div []
         [ h1 [] [ text "What are Ken Wheeler's display names on Twitter?" ]
+        , text "Since 2018-06-27"
         , br [] []
         , displayNamesView model.displayNames
         , br [] []
         , text model.error
+        , footer [] [ footerView ]
         ]
 
 
 displayNamesView : List DisplayName -> Html msg
 displayNamesView displayNames =
     displayNames
+        |> List.reverse
         |> List.map displayNameView
         |> ul []
 
@@ -72,6 +67,14 @@ displayNamesView displayNames =
 displayNameView : DisplayName -> Html msg
 displayNameView displayName =
     li [] [ text displayName.name ]
+
+
+footerView : Html Msg
+footerView =
+    Markdown.toHtml [] """
+Built by [0lpeh](https://twitter.com/0lpeh).
+Repository available at [GitHub](https://github.com/olpeh/ken-wheeler-aka)
+"""
 
 
 init : ( Model, Cmd Msg )

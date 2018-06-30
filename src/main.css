@@ -1,3 +1,11 @@
+html,
+body {
+  width: 100%;
+  height: 98%;
+  margin: 0;
+  padding: 0;
+}
+
 body {
   font-family: 'Source Sans Pro', 'Trebuchet MS', 'Lucida Grande',
     'Bitstream Vera Sans', 'Helvetica Neue', sans-serif;
@@ -8,9 +16,28 @@ body {
 
 h1 {
   font-size: 30px;
+  color: #428bc1;
 }
 
-img {
-  margin: 20px 0;
-  max-width: 200px;
+ul {
+  list-style: none;
+  text-align: left;
+  margin-left: 20%;
+}
+
+li {
+  margin-top: 10px;
+}
+
+li:first-of-type::after {
+  content: ' (current)';
+}
+
+footer {
+  font-size: 16px;
+  position: absolute;
+  bottom: 0;
+  text-align: center;
+  width: 100%;
+  overflow: hidden;
 }
