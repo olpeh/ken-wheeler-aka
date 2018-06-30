@@ -69,7 +69,7 @@ displayNameView displayName =
     li [] [ text displayName.name ]
 
 
-footerView : Html Msg
+footerView : Html msg
 footerView =
     Markdown.toHtml [] """
 Built by [0lpeh](https://twitter.com/0lpeh).
