@@ -14,30 +14,54 @@ body {
   color: #293c4b;
 }
 
+.main {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
 h1 {
   font-size: 30px;
   color: #428bc1;
 }
 
-ul {
+ul.display-names {
   list-style: none;
   text-align: left;
-  margin-left: 20%;
+  padding-left: 0;
+  margin: 0 auto;
+  margin-top: 40px;
 }
 
 li {
   margin-top: 10px;
 }
 
-li:first-of-type::after {
+.display-names li:first-of-type::after {
   content: ' (current)';
 }
 
 footer {
   font-size: 16px;
   position: absolute;
-  bottom: 0;
+  bottom: 10px;
   text-align: center;
   width: 100%;
   overflow: hidden;
+}
+
+footer ul {
+  list-style: none;
+  padding: 0;
+  margin: 0 auto;
+  text-align: center;
+}
+
+footer ul li {
+  display: inline-block;
+}
+
+footer li:not(:last-child)::after {
+  content: '   |   ';
 }
