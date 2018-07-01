@@ -14,7 +14,8 @@ type Msg
 
 type alias Model =
     { displayNames : List DisplayName
-    , error : String
+    , error : Maybe String
+    , loading: Bool
     }
 
 type alias ApiResponse =
@@ -30,7 +31,8 @@ type alias DisplayName =
 model : Model
 model =
     { displayNames = []
-    , error = ""
+    , error = Nothing
+    , loading = True
     }
 
 
@@ -38,19 +40,22 @@ update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
         GotDisplayNames displayNames ->
-            ( { model | displayNames = displayNames }, Cmd.none )
+            ( { model | displayNames = displayNames, loading = False }, Cmd.none )
 
         GotError error ->
-            ( { model | error = toString error }, Cmd.none )
+            ( { model | error = Just(toString error), loading = False }, Cmd.none )
 
 
 view : Model -> Html Msg
 view model =
     div []
         [ div [ class "main"] [ h1 [] [ text "What are Ken Wheeler's display names on Twitter?" ]
-            , text "Since 2018-06-27"
-            , displayNamesView model.displayNames
-            , text model.error]
+            , div [] [ text "Since 2018-06-27" ]
+            , if model.loading == True then
+                div [class "loading"] [ text "Loading..." ]
+              else
+                displayNamesView model.displayNames
+            , errorView model.error ]
         , footer [] [ footerView ]
         ]
 
@@ -66,6 +71,13 @@ displayNamesView displayNames =
 displayNameView : DisplayName -> Html msg
 displayNameView displayName =
     li [] [ text displayName.name ]
+
+
+errorView : Maybe String -> Html msg
+errorView error =
+    case error of
+        Just error -> text error
+        Nothing -> text ""
 
 
 footerView : Html msg

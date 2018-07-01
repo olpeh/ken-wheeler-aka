@@ -21,6 +21,10 @@ body {
   justify-content: space-around;
 }
 
+.loading {
+  margin-top: 40px;
+}
+
 h1 {
   font-size: 30px;
   color: #428bc1;
