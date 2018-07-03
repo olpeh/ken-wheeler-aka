@@ -42,7 +42,7 @@ async function setUpApp() {
           redisClient.get(screenName, async (error, result) => {
             if (result) {
               ctx.response.statusCode = 200;
-              ctx.response.body = await {
+              ctx.response.body = {
                 success: true,
                 data: JSON.parse(result)
               };
