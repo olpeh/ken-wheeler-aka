@@ -49,7 +49,7 @@ update msg model =
 view : Model -> Html Msg
 view model =
     div []
-        [ div [ class "main"] [ h1 [] [ text "What are Ken Wheeler's display names on Twitter?" ]
+        [ div [ class "main"] [ h1 [] [ text "@ken_wheeler – also known as" ]
             , div [] [ text "Since 2018-06-27" ]
             , if model.loading == True then
                 div [class "loading"] [ text "Loading..." ]
