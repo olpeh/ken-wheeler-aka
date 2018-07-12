@@ -29,7 +29,7 @@ const runCheck = async () => {
         } else {
           console.log('SUCCESS: received: ', data.name);
           const currentName = data.name;
-          await db.upsertResultForScreenName(screenName, currentName);
+          await db.insertIfChanged(screenName, currentName);
         }
       }
     );

@@ -13,14 +13,26 @@ async function getResultsForScreenName(screenName) {
   return collection.find({}, { name: 1, _id: 0 }).toArray();
 }
 
-async function upsertResultForScreenName(screenName, result) {
+async function getPreviousResultForScreenName(screenName) {
   const collection = db.collection(`results_${screenName}`);
-  const data = { name: result };
-  return await collection.update(data, data, { upsert: true });
+  return collection
+    .find({}, { name: 1, _id: 0 })
+    .sort({ _id: -1 })
+    .limit(1).result;
+}
+
+async function insertIfChanged(screenName, result) {
+  const collection = db.collection(`results_${screenName}`);
+  const previousResult = await getPreviousResultForScreenName(screenName);
+
+  if (previousResult && previousResult.name !== result) {
+    const data = { name: result };
+    return await collection.insertOne(data);
+  }
 }
 
 module.exports = {
   setup,
   getResultsForScreenName,
-  upsertResultForScreenName
+  insertIfChanged
 };
