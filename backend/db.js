@@ -14,21 +14,27 @@ async function getResultsForScreenName(screenName) {
 }
 
 async function getPreviousResultForScreenName(screenName) {
-  const collection = db.collection(`results_${screenName}`);
-  return collection
-    .find({}, { name: 1, _id: 0 })
-    .sort({ _id: -1 })
-    .limit(1).result;
+  return new Promise((resolve, reject) => {
+    db.collection(`results_${screenName}`)
+      .find({}, { name: 1, _id: 0 })
+      .sort({ _id: -1 })
+      .limit(1)
+      .toArray(function(err, data) {
+        if (err ? reject(err) : resolve(data[0]));
+      });
+  });
 }
 
 async function insertIfChanged(screenName, result) {
   const collection = db.collection(`results_${screenName}`);
-  const previousResult = await getPreviousResultForScreenName(screenName);
+  getPreviousResultForScreenName(screenName).then(previousResult => {
+    console.log({ previousResult, result });
 
-  if (previousResult && previousResult.name !== result) {
-    const data = { name: result };
-    return await collection.insertOne(data);
-  }
+    if (!previousResult || (previousResult && previousResult.name !== result)) {
+      const data = { name: result };
+      collection.insertOne(data);
+    }
+  });
 }
 
 module.exports = {
