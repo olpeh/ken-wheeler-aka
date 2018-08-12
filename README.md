@@ -16,7 +16,7 @@ Just for fun and for learning:
 
 ## Check it out!
 
-- Navigate to the page via DAT at dat://560f145e40060077ce3046ec8e5d7b3bbecdab47d2425ca80f331f3a2b5721ab/
+- Navigate to the page via DAT at dat://5a4f69ee9bd980957256c907d6c80233170956de9562708aaf97edecfed97aa9/
 - Alternatively, it is also available via [https](https://ken-wheeler-aka.hashbase.io/)
 
 ## How does it work?
