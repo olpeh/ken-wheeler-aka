@@ -37,7 +37,7 @@ Start the frontend: `npm run dev`
 
 Build the frontend: `npm run build`
 
-Deploy the frontend: Use beaker browser // TODO: automate this later
+Deploy the frontend: `npm run release`
 
 ## Acknowledgements
 
