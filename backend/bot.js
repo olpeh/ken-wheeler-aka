@@ -29,12 +29,38 @@ const runCheck = async () => {
         } else {
           console.log('SUCCESS: received: ', data.name);
           const currentName = data.name;
-          await db.insertIfChanged(screenName, currentName);
+          const wasChanged = await db.insertIfChanged(screenName, currentName);
+          if (wasChanged) {
+            const tweetText = `@ken_wheeler is now known as "${currentName}". See https://ken-wheeler-aka.hashbase.io/`;
+            tweetNow(tweetText);
+          }
         }
       }
     );
   }
 };
+
+async function tweetNow(text) {
+  const tweet = {
+    status: text
+  };
+
+  if (config.twitterConfig.enabled) {
+    console.log('Going to try to tweet: ', text);
+    bot.post('statuses/update', tweet, (err, data, response) => {
+      if (err) {
+        console.error('ERROR in tweeting!', err);
+      } else {
+        console.log('SUCCESS! tweeted: ', text);
+      }
+    });
+  } else {
+    console.log('Tweeting was disabled, but would have tweeted:', {
+      text,
+      brokenNow
+    });
+  }
+}
 
 module.exports = {
   setup: setup

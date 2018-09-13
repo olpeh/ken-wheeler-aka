@@ -33,7 +33,9 @@ async function insertIfChanged(screenName, result) {
     if (!previousResult || (previousResult && previousResult.name !== result)) {
       const data = { name: result };
       collection.insertOne(data);
+      return true;
     }
+    return false;
   });
 }
 
