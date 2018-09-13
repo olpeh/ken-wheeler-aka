@@ -16,6 +16,7 @@ body {
 
 .main {
   padding: 20px;
+  padding-bottom: 50px;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
