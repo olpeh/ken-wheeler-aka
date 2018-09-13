@@ -55,10 +55,7 @@ async function tweetNow(text) {
       }
     });
   } else {
-    console.log('Tweeting was disabled, but would have tweeted:', {
-      text,
-      brokenNow
-    });
+    console.log('Tweeting was disabled, but would have tweeted:', { text });
   }
 }
 
