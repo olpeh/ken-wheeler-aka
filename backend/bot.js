@@ -29,11 +29,7 @@ const runCheck = async () => {
         } else {
           console.log('SUCCESS: received: ', data.name);
           const currentName = data.name;
-          const wasChanged = await db.insertIfChanged(screenName, currentName);
-          if (wasChanged) {
-            const tweetText = `@ken_wheeler is now known as "${currentName}". See https://ken-wheeler-aka.hashbase.io/`;
-            tweetNow(tweetText);
-          }
+          await db.insertIfChanged(screenName, currentName);
         }
       }
     );
@@ -60,5 +56,6 @@ async function tweetNow(text) {
 }
 
 module.exports = {
-  setup: setup
+  setup: setup,
+  tweetNow: tweetNow
 };

@@ -1,6 +1,8 @@
 const client = require('mongodb').MongoClient;
 const mongoUrl = process.env.MONGODB_URI;
 
+const bot = require('./bot');
+
 let db;
 
 async function setup() {
@@ -33,9 +35,9 @@ async function insertIfChanged(screenName, result) {
     if (!previousResult || (previousResult && previousResult.name !== result)) {
       const data = { name: result };
       collection.insertOne(data);
-      return true;
+      const tweetText = `@ken_wheeler is now known as "${currentName}". See https://ken-wheeler-aka.hashbase.io/`;
+      bot.tweetNow(tweetText);
     }
-    return false;
   });
 }
 
