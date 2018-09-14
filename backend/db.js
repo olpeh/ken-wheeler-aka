@@ -35,7 +35,7 @@ async function insertIfChanged(screenName, result) {
     if (!previousResult || (previousResult && previousResult.name !== result)) {
       const data = { name: result };
       collection.insertOne(data);
-      const tweetText = `@ken_wheeler is now known as "${currentName}". See https://ken-wheeler-aka.hashbase.io/`;
+      const tweetText = `@ken_wheeler is now known as "${result}". See https://ken-wheeler-aka.hashbase.io/`;
       bot.tweetNow(tweetText);
     }
   });
