@@ -66,6 +66,10 @@ footer {
   color: #ffffff;
 }
 
+footer a {
+  color: #ffffff !important;
+}
+
 footer ul {
   list-style: none;
   padding: 0;
