@@ -20,6 +20,7 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
+  margin-bottom: 50px;
 }
 
 .loading {
@@ -29,6 +30,12 @@ body {
 h1 {
   font-size: 30px;
   color: #428bc1;
+}
+
+.since {
+  font-style: italic;
+  color: #8a8a8a;
+  font-size: 16px;
 }
 
 ul.display-names {

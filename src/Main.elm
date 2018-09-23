@@ -1,9 +1,9 @@
-module Main exposing (..)
+module Main exposing (ApiResponse, DisplayName, Model, Msg(..), decoder, displayNameDecoder, displayNameView, displayNamesView, errorView, footerView, handler, init, main, model, subscriptions, update, view)
 
-import Html exposing (Html, text, div, a, footer, h1, img, span, br, ul, li)
+import Html exposing (Html, a, br, div, footer, h1, img, li, span, text, ul)
 import Html.Attributes exposing (class)
 import Http
-import Json.Decode exposing (list, string, bool)
+import Json.Decode exposing (bool, list, string)
 import Markdown
 
 
@@ -15,8 +15,9 @@ type Msg
 type alias Model =
     { displayNames : List DisplayName
     , error : Maybe String
-    , loading: Bool
+    , loading : Bool
     }
+
 
 type alias ApiResponse =
     { success : Bool
@@ -25,7 +26,7 @@ type alias ApiResponse =
 
 
 type alias DisplayName =
-  { name: String }
+    { name : String }
 
 
 model : Model
@@ -43,19 +44,22 @@ update msg model =
             ( { model | displayNames = displayNames, loading = False }, Cmd.none )
 
         GotError error ->
-            ( { model | error = Just(toString error), loading = False }, Cmd.none )
+            ( { model | error = Just (toString error), loading = False }, Cmd.none )
 
 
 view : Model -> Html Msg
 view model =
     div []
-        [ div [ class "main"] [ h1 [] [ text "@ken_wheeler – also known as" ]
-            , div [] [ text "Since 2018-06-27" ]
+        [ div [ class "main" ]
+            [ h1 [] [ text "@ken_wheeler – also known as" ]
+            , div [ class "since" ] [ text "Since 2018-06-27" ]
             , if model.loading == True then
-                div [class "loading"] [ text "Loading..." ]
+                div [ class "loading" ] [ text "Loading..." ]
+
               else
                 displayNamesView model.displayNames
-            , errorView model.error ]
+            , errorView model.error
+            ]
         , footer [] [ footerView ]
         ]
 
@@ -65,7 +69,7 @@ displayNamesView displayNames =
     displayNames
         |> List.reverse
         |> List.map displayNameView
-        |> ul [class "display-names"]
+        |> ul [ class "display-names" ]
 
 
 displayNameView : DisplayName -> Html msg
@@ -76,8 +80,11 @@ displayNameView displayName =
 errorView : Maybe String -> Html msg
 errorView error =
     case error of
-        Just error -> text error
-        Nothing -> text ""
+        Just error ->
+            text error
+
+        Nothing ->
+            text ""
 
 
 footerView : Html msg
@@ -85,6 +92,7 @@ footerView =
     Markdown.toHtml [] """
 * Built by [0lpeh](https://twitter.com/0lpeh)
 * Repository available at [GitHub](https://github.com/olpeh/ken-wheeler-aka)
+* Follow [@ken_wheeler_aka](https://twitter.com/ken_wheeler_aka)
 """
 
 
@@ -104,8 +112,8 @@ decoder =
 
 displayNameDecoder : Json.Decode.Decoder DisplayName
 displayNameDecoder =
-  Json.Decode.map DisplayName
-    (Json.Decode.field "name" Json.Decode.string)
+    Json.Decode.map DisplayName
+        (Json.Decode.field "name" Json.Decode.string)
 
 
 handler : Result Http.Error ApiResponse -> Msg
