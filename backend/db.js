@@ -27,7 +27,7 @@ async function getPreviousResultForScreenName(screenName) {
   });
 }
 
-async function insertIfChanged(screenName, result, tweetNowFn) {
+async function insertAndTweetIfChanged(screenName, result, tweetNowFn) {
   const collection = db.collection(`results_${screenName}`);
   getPreviousResultForScreenName(screenName).then(previousResult => {
     console.log({ previousResult, result });
@@ -35,8 +35,11 @@ async function insertIfChanged(screenName, result, tweetNowFn) {
     if (!previousResult || (previousResult && previousResult.name !== result)) {
       const data = { name: result };
       collection.insertOne(data);
-      const tweetText = `@ken_wheeler is now known as "${result}". See https://ken-wheeler-aka.hashbase.io/`;
-      tweetNowFn(tweetText);
+
+      if (screenName === 'ken_wheeler') {
+        const tweetText = `@ken_wheeler is now known as "${result}". See https://ken-wheeler-aka.hashbase.io/`;
+        tweetNowFn(tweetText);
+      }
     }
   });
 }
@@ -44,5 +47,5 @@ async function insertIfChanged(screenName, result, tweetNowFn) {
 module.exports = {
   setup,
   getResultsForScreenName,
-  insertIfChanged
+  insertAndTweetIfChanged
 };

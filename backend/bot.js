@@ -29,7 +29,7 @@ const runCheck = async () => {
         } else {
           console.log('SUCCESS: received: ', data.name);
           const currentName = data.name;
-          await db.insertIfChanged(screenName, currentName, tweetNow);
+          await db.insertAndTweetIfChanged(screenName, currentName, tweetNow);
         }
       }
     );
