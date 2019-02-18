@@ -37,7 +37,7 @@ async function insertAndTweetIfChanged(screenName, result, tweetNowFn) {
       collection.insertOne(data);
 
       if (screenName === 'ken_wheeler') {
-        const tweetText = `@ken_wheeler is now known as "${result}". See https://ken-wheeler-aka.hashbase.io/`;
+        const tweetText = `.@ken_wheeler is now known as "${result}". See https://ken-wheeler-aka.hashbase.io/`;
         tweetNowFn(tweetText);
       }
     }
