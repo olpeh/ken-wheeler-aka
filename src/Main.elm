@@ -1,5 +1,6 @@
-module Main exposing (ApiResponse, DisplayName, Model, Msg(..), decoder, displayNameDecoder, displayNameView, displayNamesView, errorView, footerView, handler, init, main, model, subscriptions, update, view)
+module Main exposing (ApiResponse, DisplayName, Model, Msg(..), decoder, displayNameDecoder, displayNameView, displayNamesView, errorView, footerView, handler, init, main, subscriptions, update, view)
 
+import Browser
 import Html exposing (Html, a, br, div, footer, h1, img, li, span, text, ul)
 import Html.Attributes exposing (class)
 import Http
@@ -29,14 +30,6 @@ type alias DisplayName =
     { name : String }
 
 
-model : Model
-model =
-    { displayNames = []
-    , error = Nothing
-    , loading = True
-    }
-
-
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
@@ -47,21 +40,25 @@ update msg model =
             ( { model | error = Just (Debug.toString error), loading = False }, Cmd.none )
 
 
-view : Model -> Html Msg
+view : Model -> Browser.Document Msg
 view model =
-    div []
-        [ div [ class "main" ]
-            [ h1 [] [ text "@ken_wheeler – also known as" ]
-            , div [ class "since" ] [ text "Since 2018-06-27" ]
-            , if model.loading == True then
-                div [ class "loading" ] [ text "Loading..." ]
+    { title = "Ken Wheeler's display names"
+    , body =
+        [ div []
+            [ div [ class "main" ]
+                [ h1 [] [ text "@ken_wheeler – also known as" ]
+                , div [ class "since" ] [ text "Since 2018-06-27" ]
+                , if model.loading == True then
+                    div [ class "loading" ] [ text "Loading..." ]
 
-              else
-                displayNamesView model.displayNames
-            , errorView model.error
+                  else
+                    displayNamesView model.displayNames
+                , errorView model.error
+                ]
+            , footer [] [ footerView ]
             ]
-        , footer [] [ footerView ]
         ]
+    }
 
 
 displayNamesView : List DisplayName -> Html msg
@@ -78,10 +75,10 @@ displayNameView displayName =
 
 
 errorView : Maybe String -> Html msg
-errorView error =
-    case error of
-        Just error ->
-            text error
+errorView err =
+    case err of
+        Just e ->
+            text e
 
         Nothing ->
             text ""
@@ -96,10 +93,17 @@ footerView =
 """
 
 
-init : ( Model, Cmd Msg )
-init =
-    ( model
-    , Http.send handler (Http.get "https://ken-wheeler-aka.herokuapp.com/api/aka/ken_wheeler" decoder)
+type alias Flags =
+    { apiBaseUrl : String }
+
+
+init : Flags -> ( Model, Cmd Msg )
+init flags =
+    ( { displayNames = []
+      , error = Nothing
+      , loading = True
+      }
+    , Http.send handler (Http.get flags.apiBaseUrl decoder)
     )
 
 
@@ -131,7 +135,7 @@ subscriptions model =
     Sub.none
 
 
-main : Program Never Model Msg
+main : Program Flags Model Msg
 main =
     Browser.document
         { view = view
