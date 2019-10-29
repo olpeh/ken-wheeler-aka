@@ -15,7 +15,7 @@ type Msg
 
 type alias Model =
     { displayNames : List DisplayName
-    , error : Maybe String
+    , error : Maybe Http.Error
     , loading : Bool
     }
 
@@ -37,7 +37,7 @@ update msg model =
             ( { model | displayNames = displayNames, loading = False }, Cmd.none )
 
         GotError error ->
-            ( { model | error = Just (Debug.toString error), loading = False }, Cmd.none )
+            ( { model | error = Just error, loading = False }, Cmd.none )
 
 
 view : Model -> Browser.Document Msg
@@ -74,11 +74,25 @@ displayNameView displayName =
     li [] [ text displayName.name ]
 
 
-errorView : Maybe String -> Html msg
+errorView : Maybe Http.Error -> Html msg
 errorView err =
     case err of
         Just e ->
-            text e
+            case e of
+                Http.NetworkError ->
+                    text "No connection, try again later."
+
+                Http.Timeout ->
+                    text "Network timed out."
+
+                Http.BadUrl url ->
+                    text "It's not you, it's me. I have the server address wrong."
+
+                Http.BadStatus status ->
+                    text "The server didn't like the request (bad status)."
+
+                Http.BadPayload _ _ ->
+                    text "Ouch, the server responded with strange contents."
 
         Nothing ->
             text ""
