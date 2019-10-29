@@ -35,7 +35,8 @@
     "twit": "^2.2.10"
   },
   "devDependencies": {
-    "elm": "^0.18.0",
-    "prettier": "1.13.0"
+    "elm": "0.19.1",
+    "elm-format": "0.8.2",
+    "prettier": "1.18.2"
   }
 }
