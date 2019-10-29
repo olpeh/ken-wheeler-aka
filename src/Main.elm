@@ -44,7 +44,7 @@ update msg model =
             ( { model | displayNames = displayNames, loading = False }, Cmd.none )
 
         GotError error ->
-            ( { model | error = Just (toString error), loading = False }, Cmd.none )
+            ( { model | error = Just (Debug.toString error), loading = False }, Cmd.none )
 
 
 view : Model -> Html Msg
@@ -133,9 +133,9 @@ subscriptions model =
 
 main : Program Never Model Msg
 main =
-    Html.program
+    Browser.document
         { view = view
         , init = init
         , update = update
-        , subscriptions = always Sub.none
+        , subscriptions = subscriptions
         }
