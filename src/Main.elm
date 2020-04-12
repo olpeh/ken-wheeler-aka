@@ -1,8 +1,8 @@
 module Main exposing (ApiResponse, DisplayName, Model, Msg(..), decoder, displayNameDecoder, displayNameView, displayNamesView, errorView, footerView, handler, init, main, subscriptions, update, view)
 
 import Browser
-import Html exposing (Html, a, br, div, footer, h1, img, li, span, text, ul)
-import Html.Attributes exposing (class)
+import Html exposing (Html, a, br, div, footer, h1, img, li, ol, span, text, ul)
+import Html.Attributes exposing (class, reversed)
 import Http
 import Json.Decode exposing (bool, list, string)
 import Markdown
@@ -66,7 +66,7 @@ displayNamesView displayNames =
     displayNames
         |> List.reverse
         |> List.map displayNameView
-        |> ul [ class "display-names" ]
+        |> ol [ class "display-names", reversed True ]
 
 
 displayNameView : DisplayName -> Html msg
@@ -76,7 +76,7 @@ displayNameView displayName =
             li [] [ text name ]
 
         Nothing ->
-            li [] [ text "Error: Invalid data –\u{00A0}can not display this name" ]
+            li [ class "error" ] [ text "Error: Invalid data – possibly \"undefined\" or \"null\"" ]
 
 
 errorView : Maybe Http.Error -> Html msg
