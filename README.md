@@ -16,8 +16,8 @@ Just for fun and for learning:
 
 ## Check it out!
 
-- Navigate to the page via DAT at dat://5a4f69ee9bd980957256c907d6c80233170956de9562708aaf97edecfed97aa9/
-- Alternatively, it is also available via [https](https://ken-wheeler-aka.hashbase.io/)
+- Navigate to the page via DAT at dat://4518c00aec0fa8a24ad57c7c3cd3a6086951b99aa2981f5818454203c9584084/
+- Alternatively, it is also available via [https served by Hashbase](https://ken-wheeler-aka.hashbase.io/)
 
 ## How does it work?
 
