@@ -85,10 +85,10 @@ errorView err =
                 Http.Timeout ->
                     text "Network timed out."
 
-                Http.BadUrl url ->
+                Http.BadUrl _ ->
                     text "It's not you, it's me. I have the server address wrong."
 
-                Http.BadStatus status ->
+                Http.BadStatus _ ->
                     text "The server didn't like the request (bad status)."
 
                 Http.BadPayload _ _ ->
