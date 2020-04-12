@@ -33,7 +33,8 @@ async function insertAndTweetIfChanged(screenName, result, tweetNowFn) {
     console.log({ previousResult, result });
 
     if (!previousResult || (previousResult && previousResult.name !== result)) {
-      const data = { name: result };
+      // Always cast to string in order to allow "undefined" as a string etc.
+      const data = { name: `${result}` };
       collection.insertOne(data);
 
       if (screenName === 'ken_wheeler') {
