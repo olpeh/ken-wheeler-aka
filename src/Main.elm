@@ -27,7 +27,7 @@ type alias ApiResponse =
 
 
 type alias DisplayName =
-    { name : String }
+    { name : Maybe String }
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
@@ -71,7 +71,12 @@ displayNamesView displayNames =
 
 displayNameView : DisplayName -> Html msg
 displayNameView displayName =
-    li [] [ text displayName.name ]
+    case displayName.name of
+        Just name ->
+            li [] [ text name ]
+
+        Nothing ->
+            li [] [ text "Error: Invalid data –\u{00A0}can not display this name" ]
 
 
 errorView : Maybe Http.Error -> Html msg
@@ -131,7 +136,7 @@ decoder =
 displayNameDecoder : Json.Decode.Decoder DisplayName
 displayNameDecoder =
     Json.Decode.map DisplayName
-        (Json.Decode.field "name" Json.Decode.string)
+        (Json.Decode.maybe (Json.Decode.field "name" Json.Decode.string))
 
 
 handler : Result Http.Error ApiResponse -> Msg
