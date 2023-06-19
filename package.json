@@ -5,7 +5,7 @@
   "main": "backend/index.js",
   "scripts": {
     "start": "NODE_OPTIONS='--openssl-legacy-provider' node ./backend/index.js",
-    "dev": "elm-app start",
+    "dev": "NODE_OPTIONS='--openssl-legacy-provider' elm-app start",
     "build": "echo no-op",
     "build:frontend": "NODE_OPTIONS='--openssl-legacy-provider' NODE_ENV=production elm-app build",
     "test": "test"
