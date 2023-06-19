@@ -16,8 +16,7 @@ Just for fun and for learning:
 
 ## Check it out!
 
-- Navigate to the page via DAT at dat://4518c00aec0fa8a24ad57c7c3cd3a6086951b99aa2981f5818454203c9584084/
-- Alternatively, it is also available via [https served by Hashbase](https://ken-wheeler-aka.hashbase.io/)
+https://ken-wheeler-aka.vercel.app/
 
 ## How does it work?
 
@@ -31,13 +30,13 @@ Install dependencies: `yarn`
 
 Start the backend: `npm start`
 
-Deploy the backend: `git push heroku master`
+Deploy the backend: `fly deploy` (Fly.io)
 
 Start the frontend: `npm run dev`
 
 Build the frontend: `npm run build`
 
-Deploy the frontend: `npm run release`
+Deploy the frontend: `git push` (Vercel)
 
 ## Acknowledgements
 
