@@ -6,10 +6,9 @@
   "scripts": {
     "start": "node ./backend/index.js",
     "dev": "elm-app start",
-    "build": "NODE_ENV=production elm-app build",
-    "test": "test",
-    "release": "npm run build && npm run deploy:dat",
-    "deploy:dat": "rimraf ~/Sites/ken-wheeler-aka && cp -r build/ ~/Sites/ken-wheeler-aka"
+    "build": "echo no-op",
+    "build:frontend": "NODE_ENV=production elm-app build",
+    "test": "test"
   },
   "repository": {
     "type": "git",

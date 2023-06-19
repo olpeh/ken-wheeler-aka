@@ -1,0 +1,21 @@
+# flyctl launch added from .gitignore
+**/.DS_Store
+**/node_modules
+**/dist
+**/build
+**/npm-debug.log*
+**/.env*
+**/*.swp
+**/.vscode
+**/site
+
+**/package-lock\.json
+
+# elm-package generated files
+**/elm-stuff
+
+# elm-repl generated files
+**/repl-temp-*
+
+**/dump\.rdb
+fly.toml
