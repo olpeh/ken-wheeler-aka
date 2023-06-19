@@ -33,7 +33,7 @@ async function getPreviousResultForScreenName(screenName) {
 async function insertAndTweetIfChanged(screenName, result, tweetNowFn) {
   const collection = db.collection(`results_${screenName}`);
   getPreviousResultForScreenName(screenName).then(previousResult => {
-    console.log({ previousResult, result });
+    console.log('Found from db:', { previousResult, result });
 
     if (!previousResult || (previousResult && previousResult.name !== result)) {
       // Always cast to string in order to allow "undefined" as a string etc.
