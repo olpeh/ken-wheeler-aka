@@ -1,4 +1,4 @@
-const client = require('mongodb').MongoClient;
+const { MongoClient } = require('mongodb');
 const mongoUrl = process.env.MONGODB_URI;
 
 const bot = require('./bot');
@@ -6,7 +6,10 @@ const bot = require('./bot');
 let db;
 
 async function setup() {
-  db = await client.connect(mongoUrl);
+  const client = new MongoClient(mongoUrl);
+  const dbName = 'ken-wheeler-aka';
+  await client.connect();
+  db = client.db(dbName);
   console.log('Initializing db...');
 }
 
