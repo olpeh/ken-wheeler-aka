@@ -14,7 +14,7 @@ require('dotenv').config();
 app.use(cors());
 app.use(bodyParser());
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 8080;
 const redisUrl = process.env.REDIS_URL || 'redis://localhost:6379';
 const cacheTtlSeconds = process.env.CACHE_TTL_SECONDS || 60;
 app.use(
