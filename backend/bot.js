@@ -14,7 +14,7 @@ function setup() {
 }
 
 const runCheck = async () => {
-  console.log('Checking for names via the Twitter API');
+  console.log('Checking for names via the Twitter API', new Date());
   const screenNames = SCREEN_NAMES.split(' ');
 
   for (const screenName of screenNames) {
