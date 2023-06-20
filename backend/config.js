@@ -9,6 +9,6 @@ module.exports = {
   },
   twitterConfig: {
     check: process.env.TWITTER_CHECK_RATE * 1000 * 60,
-    enabled: process.env.TWEETING_ENABLED || false
+    enabled: process.env.TWEETING_ENABLED === 'true' || false
   }
 };
