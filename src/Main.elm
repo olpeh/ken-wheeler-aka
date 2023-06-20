@@ -47,7 +47,7 @@ view model =
         [ div []
             [ div [ class "main" ]
                 [ h1 [] [ text "@ken_wheeler – also known as" ]
-                , div [ class "since" ] [ text "Since 2018-06-27" ]
+                , div [ class "since" ] [ text "Since 2018-06-27 (note: missing data between 11/2020 and 06/2023)" ]
                 , if model.loading == True then
                     div [ class "loading" ] [ text "Loading..." ]
 
