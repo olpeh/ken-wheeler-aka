@@ -19,13 +19,7 @@ async function getResultsForScreenName(screenName) {
 }
 
 async function getPreviousResultForScreenName(collection) {
-  return collection
-    .find({}, { name: 1, _id: 0 })
-    .sort({ _id: -1 })
-    .limit(1)
-    .toArray(function(err, data) {
-      if (err ? reject(err) : resolve(data[0]));
-    });
+  return collection.findOne({}, { name: 1, _id: 0, sort: { _id: -1 } });
 }
 
 async function insertAndTweetIfChanged(screenName, result, tweetNowFn) {
