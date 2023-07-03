@@ -6,6 +6,7 @@ import Html.Attributes exposing (class, reversed)
 import Http
 import Json.Decode exposing (bool, list, string)
 import Markdown
+import Html.Attributes exposing (href)
 
 
 type Msg
@@ -46,7 +47,7 @@ view model =
     , body =
         [ div []
             [ div [ class "main" ]
-                [ h1 [] [ text "@ken_wheeler – also known as" ]
+                [ h1 [] [ a [class "twitter-link", href "https://twitter.com/ken_wheeler"] [text "@ken_wheeler – also known as" ]]
                 , div [ class "since" ] [ text "Since 2018-06-27 (note: missing data between 11/2020 and 06/2023)" ]
                 , if model.loading == True then
                     div [ class "loading" ] [ text "Loading..." ]
